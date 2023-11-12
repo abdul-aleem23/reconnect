@@ -1,11 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
 import { auth, provider } from "../firebase-config.js";
 import { signInWithPopup } from "firebase/auth";
+import { Player } from '@lottiefiles/react-lottie-player';
+import house from "../../public/animations/house-animation.json"
 
 //Cookies
 import Cookies from "universal-cookie";
-
-import hero from "../images/bg-1.png";
 
 const cookies = new Cookies();
 
@@ -57,8 +57,8 @@ const Auth = (props) => {
             </div>
           </div>
 
-          <div className="w-2/5 flex justify-center items-center">
-            <img src={hero} className="w-[600px] lg:w-[600px] rounded-full" />
+          <div className="flex justify-center items-center mt-3 md:w-1/2 lg:w-2/5">
+            <Player autoplay loop src={house}></Player>
           </div>
 
         </div>
