@@ -17,6 +17,7 @@ const Chat = (props) => {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [members, setMembers] = useState([]);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const queryMessages = query(
@@ -57,6 +58,11 @@ const Chat = (props) => {
     };
   }, [room, setInChat]);
 
+  useEffect(() => {
+    // Scroll to the last message when messages are updated
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (newMessage === "") return;
@@ -74,7 +80,7 @@ const Chat = (props) => {
 
   return (
     <div className="w-full h-screen flex flex-col md:flex-row lg:flex-row justify-center items-center bg-gray-100">
-      <div id="left" className="w-1/2">
+      <div id="left" className="w-full">
         <h2>Family:</h2>
         <ul>
           {members.map((member) => (
@@ -83,7 +89,10 @@ const Chat = (props) => {
         </ul>
       </div>
 
-      <div id="right" className="w-1/2 flex justify-center items-center">
+      <div
+        id="right"
+        className="w-full md:w-1/2 lg:w-1/2 flex justify-center items-center"
+      >
         <div className="w-full max-w-screen-sm md:max-w-screen-md lg:max-w-screen-sm bg-white rounded-lg shadow-lg p-4">
           <div className="text-lg font-bold mb-4">Chat Room: {room}</div>
           <div className="overflow-y-auto max-h-96">
@@ -120,6 +129,7 @@ const Chat = (props) => {
                 </div>
               </div>
             ))}
+            <div ref={messagesEndRef}></div>
           </div>
           <form
             onSubmit={handleSubmit}

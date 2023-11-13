@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { PiChatFill } from "react-icons/pi";
 import { useHistory } from "react-router-dom";
 import { Player } from '@lottiefiles/react-lottie-player';
-import famPhoto from "../../public/animations/family-puzzle.json";
+import famPhoto from "../assets/animations/family-puzzle.json";
 
 const ChatRoom = ({ onRoomChange }) => {
   const roomInputRef = useRef(null);
